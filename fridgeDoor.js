@@ -1,9 +1,9 @@
-
-/*
-    Example of post form handling, markdown processing and static files.
-*/
 var express = require('express');
+var exphbs = require('express-handlebars');
 var app = express();
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view-engine', 'handlebars');
 app.use(express.static('public')); // For static assets
 var bodyParser = require('body-parser');
 // create application/x-www-form-urlencoded parser
@@ -13,9 +13,13 @@ var reader = new commonmark.Parser();
 var writer = new commonmark.HtmlRenderer();
 
 // Respond to post request from form page.
-app.post("/notePost", urlencodedParser, function(req, res) {
+app.post('/notePost', urlencodedParser, function(req, res) {
 	console.log(req.body);
     res.send(createHtmlMessage(req.body));
+});
+
+app.get('/', function(req,res) {
+    res.render('note', req.query);
 });
 
 function createHtmlMessage(info) {
@@ -23,6 +27,7 @@ function createHtmlMessage(info) {
     let message = writer.render(parsed);
     return `${message}`;
 }
+
 
 const host = '127.0.0.1';
 const port = '5555';
