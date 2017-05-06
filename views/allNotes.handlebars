@@ -1,0 +1,14 @@
+<table style = "width:100%"> 
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>When</th>
+    </tr>
+    {{#each notes}}
+    <tr>
+        <th>{{user_title}}</th>
+        <th>{{user_author}}</th>
+        <th>{{datetime}}</th>
+    </tr>
+    {{/each}}
+</table>

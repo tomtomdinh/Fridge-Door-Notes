@@ -14,11 +14,17 @@ var commonmark = require('commonmark');
 var reader = new commonmark.Parser();
 var writer = new commonmark.HtmlRenderer();
 
+app.get('/', function(req,res) {
+    db.find({}, function(err,docs){
+      res.render('allNotes',{notes:docs});  
+    });
+});
+
+
 // Respond to post request from form page.
 app.post('/notePost', urlencodedParser, function(req, res) {
 	console.log(req.body);
     var content = renderMessage(req.body.user_content);
-    console.log(req.body.user_title);
     var info = {user_title: req.body.user_title, user_author: req.body.user_author, user_content: content};
     res.render('note', info);
     var dateTime = new Date();
@@ -32,12 +38,6 @@ app.post('/notePost', urlencodedParser, function(req, res) {
         }
     });
 });
-
-app.get('/', function(req,res) {
-    let info = {user_title: "hello", user_author: "yo", datetime: "date", user_content: "# content"};
-   res.render('note', info); 
-});
-
 
 function renderMessage(info) {
     let parsed = reader.parse(info);
