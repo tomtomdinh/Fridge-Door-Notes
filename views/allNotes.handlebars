@@ -1,4 +1,4 @@
-<table style = "width:100%"> 
+<table style = "width:50%"> 
     <tr>
         <th>Title</th>
         <th>Author</th>
@@ -6,7 +6,7 @@
     </tr>
     {{#each notes}}
     <tr>
-        <th>{{user_title}}</th>
+        <th><a href = '/note/{{_id}}'>{{user_title}}</a></th>
         <th>{{user_author}}</th>
         <th>{{datetime}}</th>
     </tr>
