@@ -1,0 +1,73 @@
+body {
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    width: 900px;;
+}
+
+input {
+    width: 200px;
+    margin: 10px;
+}
+
+select {
+    margin: 10px;
+    width: 105px;
+}
+
+label {
+    display: inline-block;
+    width: 50px;
+}
+
+button {
+    width: 120px;
+    position: relative;
+    right: 350px;
+}
+
+textarea {
+    height:40vh;
+    width:40vh;
+    margin: 5px;
+}
+
+
+input[type="checkbox"] {
+    width: 50px;
+    margin: 0px;
+}
+
+head+body div:first-child {
+    background-color: black;
+    text-align: left;
+}
+
+div a {
+    margin: 10px;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+table {
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+    margin: 20px;
+    border-bottom: solid 1px;
+}
+
+th {
+    padding: 2px;
+}
+
+td {
+    padding: 2px;
+}
+
+
+
+
+
+
+

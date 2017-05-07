@@ -36,9 +36,60 @@ app.get('/', function (req, res) {
     });
 });
 
+app.post('/deleteForm', urlencodedParser, function(req,res) {
+    console.log(req.body);
+    var id = Object.keys(req.body);
+    for(var i = 0 ; i < id.length; i++) {
+    db.remove({_id : id[i] }, {multi:true}, function(err,numRemoved) {
+        if(err) {
+            console.log("something went wrong");
+        } else {
+            console.log("numremoved " + numRemoved);
+        }
+    })
+    }
+    res.redirect('/');
+});
+
+app.get('/deleteForm', function(req,res){
+        console.log("delete form");
+      db.find({}).sort({"datetime": 1}).exec(function (err, docs) {
+        if (err) {
+            console.log("Something went wrong");
+        } else {
+            console.log("it worked");
+            for(var d of docs) {
+                var date = new Date(d.datetime);
+                d.datetime = date.toLocaleString();
+            }
+            res.render('deleteForm',{notes: docs});
+        }
+    });
+   
+});
+
+app.get('/noteForm', function(req,res) {
+   res.render('noteForm') ;
+});
+
+// Respond to post request from form page.
+app.post('/notePost', urlencodedParser, function (req, res) {
+    var dateTime = new Date();
+    req.body.user_content = renderMessage(req.body.user_content);
+    db.insert(Object.assign({datetime: dateTime.valueOf()}, req.body), function (err, newDocs) {
+        if (err) {
+            console.log("something went wrong");
+            console.log(err);
+        } else {
+            console.log(newDocs);
+            res.redirect('/note/' + newDocs._id);
+        }
+    });
+});
+
 app.get('/note/:noteID', function(req,res) {
-    console.log(req.params.noteID);
     var id = req.params.noteID;
+   // console.log(id);
     db.findOne({_id: id}, function(err,docs) {
         if(err) {
             console.log("Something went wrong");
@@ -46,22 +97,6 @@ app.get('/note/:noteID', function(req,res) {
             var date = new Date(docs.datetime);
             docs.datetime = date.toLocaleString();
             res.render('note', docs);
-        }
-    });
-});
-
-
-// Respond to post request from form page.
-app.post('/notePost', urlencodedParser, function (req, res) {
-    console.log(req.body);
-    var dateTime = new Date();
-
-    db.insert(Object.assign({datetime: dateTime.valueOf()}, req.body), function (err, newDocs) {
-        if (err) {
-            console.log("something went wrong");
-            console.log(err);
-        } else {
-            console.log("added");
         }
     });
 });
