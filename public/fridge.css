@@ -2,7 +2,8 @@ body {
     margin-left:auto;
     margin-right:auto;
     text-align: center;
-    width: 900px;;
+    width: 800px;
+    font-family: "Lato", sans-serif;
 }
 
 input {
@@ -23,7 +24,7 @@ label {
 button {
     width: 120px;
     position: relative;
-    right: 350px;
+    right: 300px;
 }
 
 textarea {
@@ -38,15 +39,16 @@ input[type="checkbox"] {
     margin: 0px;
 }
 
-head+body div:first-child {
+head+body> div:first-child {
     background-color: black;
     text-align: left;
 }
 
 div a {
-    margin: 10px;
     text-decoration: none;
     color: whitesmoke;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 table {
@@ -65,6 +67,22 @@ td {
     padding: 2px;
 }
 
+head+body > div:first-child a:focus,
+head+body > div:first-child a:hover {
+    background-color: #e9e6e6;
+    color: black;
+}
+
+.tabbed-controls li.active a {
+    background-color: white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: none;
+    border-left: solid 1px #413838;
+    border-right: solid 1px #413838;
+    border-top: solid 1px #413838;
+    color: black;
+}
 
 
 

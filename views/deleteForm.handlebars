@@ -10,7 +10,7 @@
     <form action = '/deleteForm' method = "post">
     {{#each notes}}
     <tr>
-        <td><input type = "checkbox" name = {{_id}}></td>
+        <td><input type = "checkbox" name = "{{_id}}"></td>
         <td><a href = '/note/{{_id}}'>{{user_title}}</a></td>
         <td>{{user_author}}</td>
         <td>{{datetime}}</td>
